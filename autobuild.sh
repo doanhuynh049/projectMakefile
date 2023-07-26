@@ -1,16 +1,6 @@
 #!/bin/bash
 function build(){
-    echo "List all revision in builded branch "
-    git log --oneline $1
-    echo -n "which revision you want to build: "
-    read revision
-    # if [ -z "$revision"]; then 
-    #     revision = $(git log -n 1 --pretty=format:%H)
-    # fi
-    echo "Git revision: $revision"
-
-
-    echo $revision
+    git checkout $1
     ./build.sh
 }
 if [ -z "$1" ]; then 
@@ -20,13 +10,16 @@ else
     git checkout "$1"
     echo -n "Do you want to continue building build.sh? (y/n): "
     read confirm 
-    
-
+     echo "List all revisions in branch "
+    git log --oneline $1
+    echo -n "which revision do you want to build (enter commit hash): "
+    read revision
+    echo "Git revision: $revision"
 
 
     while true; do
         case $confirm in
-            [Yy]* ) build; break;;
+            [Yy]* ) build $revision; break;;
             [Nn]* ) exit;;
             * ) echo "Please enter y or n"; read confirm; sleep 1;;
         esac

@@ -1,2 +1,2 @@
 echo "quat"
-$(git rev-parse HEAD)
+echo "quat2"
