@@ -1,4 +1,5 @@
 #!/bin/bash
+# git rev-parse HEAD
 function build(){
     echo "List all revisions in branch "
     git log --oneline $1
