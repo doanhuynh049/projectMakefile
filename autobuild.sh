@@ -2,6 +2,7 @@
 function build(){
     git checkout $1
     ./build.sh
+     git switch -
 }
 if [ -z "$1" ]; then 
     git branch -a
