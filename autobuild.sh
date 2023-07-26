@@ -6,9 +6,9 @@ function build(){
     echo -n "which revision do you want to build (enter commit hash): "
     read revision
     
-    # if ! git branch --contains "$revision" &>/dev/null; then
-    #     revision=git rev-parse HEAD
-    # fi
+    if ! git branch --contains "$revision" &>/dev/null; then
+        revision=git rev-parse HEAD
+    fi
     # flag=false
     # while true; do
         
