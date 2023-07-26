@@ -1,8 +1,26 @@
 #!/bin/bash
 function build(){
+    echo "List all revisions in branch "
+    git log --oneline $1
+    echo -n "which revision do you want to build (enter commit hash): "
+    read revision
+    
+    flag=false
+    while true; do
+        read revision
+        if ! git branch --contains "$revision" &>/dev/null; then
+            if ! $flag; then 
+                echo -n "re-Enter the revision: "
+                flag=true
+            fi
+        else 
+            break
+        fi
+    done
+    echo "Git revision: $revision"
     git checkout $1
     ./build.sh
-     git switch -
+    git switch -
 }
 if [ -z "$1" ]; then 
     git branch -a
@@ -11,12 +29,7 @@ else
     git checkout "$1"
     echo -n "Do you want to continue building build.sh? (y/n): "
     read confirm 
-     echo "List all revisions in branch "
-    git log --oneline $1
-    echo -n "which revision do you want to build (enter commit hash): "
-    read revision
-    echo "Git revision: $revision"
-
+     
 
     while true; do
         case $confirm in
