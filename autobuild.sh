@@ -5,18 +5,23 @@ function build(){
     echo -n "which revision do you want to build (enter commit hash): "
     read revision
     
-    flag=false
-    while true; do
-        read revision
-        if ! git branch --contains "$revision" &>/dev/null; then
-            if ! $flag; then 
-                echo -n "re-Enter the revision: "
-                flag=true
-            fi
-        else 
-            break
-        fi
-    done
+    if ! git branch --contains "$revision" &>/dev/null; then
+        revision=git rev-parse HEAD
+    fi
+    # flag=false
+    # while true; do
+        
+    #     if ! git branch --contains "$revision" &>/dev/null; then
+    #         if ! $flag; then 
+    #             echo -n "re-Enter the revision: "
+    #             read revision
+    #             flag=true
+    #         fi
+    #     else 
+    #         break
+    #     fi
+        
+    # done
     echo "Git revision: $revision"
     git checkout $1
     ./build.sh
