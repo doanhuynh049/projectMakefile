@@ -24,7 +24,7 @@ function build(){
         
     # done
     echo "Git revision: $revision"
-    git checkout $1
+    git checkout $revision
     ./build.sh
     git switch -
 }
