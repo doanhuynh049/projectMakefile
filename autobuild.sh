@@ -33,6 +33,20 @@ if [ -z "$1" ]; then
 else 
     git show-branch "$s1"
     git checkout "$1"
+    git pull        # to pull latest version of branch
+    @echo "show branch used"
+    git branch      # to show branch used
+    @echo "branch status"
+    git status
+    echo -n "Do you need to clean existing thing or commit it?"
+    read clean
+    if [ -z "$clean" ]; then
+        git add .
+        git commit -m "update"
+        git push 
+    else
+        git clean -fdx
+    fi
     echo -n "Do you want to continue building build.sh? (y/n): "
     read confirm 
      
@@ -41,7 +55,7 @@ else
         case $confirm in
             [Yy]* ) build $revision; break;;
             [Nn]* ) exit;;
-            * ) echo "Please enter y or n"; read confirm; sleep 1;;
+            * ) @echo "Please enter y or n"; read confirm; sleep 1;;
         esac
     done
 fi
