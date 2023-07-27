@@ -7,7 +7,7 @@ function build(){
     read revision
     
     if ! git branch --contains "$revision" &>/dev/null; then
-        revision=git rev-parse HEAD
+        revision= git rev-parse HEAD
     fi
     # flag=false
     # while true; do
@@ -38,7 +38,7 @@ else
     git branch      # to show branch used
     @echo "branch status"
     git status
-    echo -n "Do you need to clean existing thing or commit it?"
+    echo -n "Do you need to clean existing thing or commit it? (enter to commit)"
     read clean
     if [ -z "$clean" ]; then
         git add .
