@@ -43,7 +43,7 @@ else
     if [ -z "$clean" ]; then
         git add .
         git commit -m "update"
-        git push 
+        git push $1
     else
         git clean -fdx
     fi
