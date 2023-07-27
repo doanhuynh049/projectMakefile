@@ -26,7 +26,7 @@ function build(){
     echo "Git revision: $revision"
     git checkout $revision
     ./build.sh
-    git switch -
+    @git switch -
 }
 if [ -z "$1" ]; then 
     git branch -a
